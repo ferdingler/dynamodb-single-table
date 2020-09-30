@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from '@aws-cdk/core';
-import { DdbSingleTableStack } from '../lib/ddb-single-table-stack';
+import { SingleTableApp } from '../lib/SingleTableApp';
+import { MultiTableApp } from '../lib/MultiTableApp';
 
 const app = new cdk.App();
-new DdbSingleTableStack(app, 'DdbSingleTableStack');
+new SingleTableApp(app, 'SingleTableApp');
+new MultiTableApp(app, 'MultiTableApp');
