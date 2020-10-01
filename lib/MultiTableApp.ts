@@ -27,18 +27,6 @@ export class MultiTableApp extends cdk.Stack {
       },
     });
 
-    const itemsTable = new dynamodb.Table(this, "OrderItems", {
-      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
-      partitionKey: {
-        name: "orderId",
-        type: dynamodb.AttributeType.STRING,
-      },
-      sortKey: {
-        name: "itemId",
-        type: dynamodb.AttributeType.STRING,
-      },
-    });
-
     const appLambda = new lambda.Function(this, "SingleAppLambda", {
       runtime: lambda.Runtime.NODEJS_12_X,
       code: lambda.Code.fromAsset("./lambda"),
@@ -48,7 +36,6 @@ export class MultiTableApp extends cdk.Stack {
       environment: {
         CUSTOMERS_TABLE: customersTable.tableName,
         ORDERS_TABLE: ordersTable.tableName,
-        ITEMS_TABLE: itemsTable.tableName,
       }
     });
 
@@ -58,11 +45,9 @@ export class MultiTableApp extends cdk.Stack {
           // Grant permissions to table itself
           customersTable.tableArn,
           ordersTable.tableArn,
-          itemsTable.tableArn,
           // Grant permissions to GSI indexes
           customersTable.tableArn.concat("/index/*"),
           ordersTable.tableArn.concat("/index/*"),
-          itemsTable.tableArn.concat("/index/*"),
         ],
         actions: [
           "dynamodb:PutItem",
