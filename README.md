@@ -1,14 +1,3 @@
-# Welcome to your CDK TypeScript project!
+# Single-Table DynamoDB Pattern
 
-This is a blank project for TypeScript development with CDK.
-
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
-
-## Useful commands
-
- * `npm run build`   compile typescript to js
- * `npm run watch`   watch for changes and compile
- * `npm run test`    perform the jest unit tests
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk synth`       emits the synthesized CloudFormation template
+This is a quick-and-dirty example of an implementation of the Single-Table pattern in comparisson to a Multi-Table approach. This project is an AWS CDK application that deploys 2 separate CloudFormation stacks: `SingleTableApp` and `MultiTableApp`. Each composed of a Lambda function, an HTTP API and their corresponding DynamoDB tables.
