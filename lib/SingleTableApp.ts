@@ -62,7 +62,7 @@ export class SingleTableApp extends cdk.Stack {
     });
 
     api.addRoutes({
-      path: "/customer/:id",
+      path: "/customer/{id}",
       integration: lambdaIntegration,
       methods: [apigateway.HttpMethod.GET],
     });

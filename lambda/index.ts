@@ -1,11 +1,12 @@
-const CUSTOMERS_TABLE = process.env.CUSTOMERS_TABLE;
-const ORDERS_TABLE = process.env.ORDERS_TABLE;
-const ITEMS_TABLE = process.env.ITEMS_TABLE;
+import MultiTableApp from "./multi-table";
+import SingleTableApp from "./single-table";
 
-export const singleTableHandler = async () => {
-  return "Hello";
+export const singleTableHandler = async (event: any) => {
+  console.log("Event = ", JSON.stringify(event));
+  return SingleTableApp.fetchCustomerWithOrders("123");
 };
 
-export const multiTableHandler = async () => {
-  return "Hello";
+export const multiTableHandler = async (event: any) => {
+  console.log("Event = ", JSON.stringify(event));
+  return MultiTableApp.fetchCustomerWithOrders("123");
 };

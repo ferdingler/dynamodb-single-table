@@ -1,7 +1,8 @@
-import * as cdk from '@aws-cdk/core';
-import * as dynamodb from '@aws-cdk/aws-dynamodb';
-import * as lambda from '@aws-cdk/aws-lambda';
-import * as iam from '@aws-cdk/aws-iam';
+import * as cdk from "@aws-cdk/core";
+import * as dynamodb from "@aws-cdk/aws-dynamodb";
+import * as lambda from "@aws-cdk/aws-lambda";
+import * as iam from "@aws-cdk/aws-iam";
+import * as apigateway from "@aws-cdk/aws-apigatewayv2";
 
 export class MultiTableApp extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -36,11 +37,12 @@ export class MultiTableApp extends cdk.Stack {
       environment: {
         CUSTOMERS_TABLE: customersTable.tableName,
         ORDERS_TABLE: ordersTable.tableName,
-      }
+      },
     });
 
-    appLambda.addToRolePolicy(new iam.PolicyStatement({
-      effect: iam.Effect.ALLOW,
+    appLambda.addToRolePolicy(
+      new iam.PolicyStatement({
+        effect: iam.Effect.ALLOW,
         resources: [
           // Grant permissions to table itself
           customersTable.tableArn,
@@ -62,8 +64,18 @@ export class MultiTableApp extends cdk.Stack {
           "dynamodb:Scan",
           "dynamodb:UpdateItem",
         ],
-    }));
+      })
+    );
 
-    
+    const api = new apigateway.HttpApi(this, "MultiTableApi");
+    const lambdaIntegration = new apigateway.LambdaProxyIntegration({
+      handler: appLambda,
+    });
+
+    api.addRoutes({
+      path: "/customer/{id}",
+      integration: lambdaIntegration,
+      methods: [apigateway.HttpMethod.GET],
+    });
   }
 }
