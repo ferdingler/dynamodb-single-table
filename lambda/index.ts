@@ -3,10 +3,12 @@ import SingleTableApp from "./single-table";
 
 export const singleTableHandler = async (event: any) => {
   console.log("Event = ", JSON.stringify(event));
-  return SingleTableApp.fetchCustomerWithOrders("123");
+  const customerId = event.pathParameters.id;
+  return SingleTableApp.fetchCustomerWithOrders(customerId);
 };
 
 export const multiTableHandler = async (event: any) => {
   console.log("Event = ", JSON.stringify(event));
-  return MultiTableApp.fetchCustomerWithOrders("123");
+  const customerId = event.pathParameters.id;
+  return MultiTableApp.fetchCustomerWithOrders(customerId);
 };

@@ -18,7 +18,7 @@ async function fetchCustomerWithOrders(customerId: string): Promise<Customer> {
     })
     .promise();
 
-  if (!result.Items) {
+  if (!result.Items || result.Items.length <= 0) {
     throw new Error("Customer not found");
   }
 

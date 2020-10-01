@@ -36,10 +36,7 @@ async function fetchCustomerWithOrders(customerId: string): Promise<Customer> {
     })
     .promise();
 
-  customer.orders = queryResult.Items
-    ? (queryResult.Items as Array<Order>)
-    : [];
-
+  customer.orders = queryResult.Items as Array<Order>;
   return customer;
 }
 
