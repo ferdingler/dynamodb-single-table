@@ -15,6 +15,6 @@ export const multiTableHandler = async (event: any) => {
 };
 
 export const datagenHandler = async () => {
-  const numberCustomers = 10;
+  const numberCustomers = 60;
   return RandomDataGenerator.loadFakeData(numberCustomers);
 };
