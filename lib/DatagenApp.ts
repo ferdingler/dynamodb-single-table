@@ -18,7 +18,7 @@ export class DatagenApp extends cdk.Stack {
       code: lambda.Code.fromAsset("./lambda"),
       handler: "index.datagenHandler",
       memorySize: 512,
-      timeout: cdk.Duration.seconds(300),
+      timeout: cdk.Duration.seconds(100),
       tracing: lambda.Tracing.ACTIVE,
       environment: {
         SINGLE_TABLE: props.singleTable.tableName,

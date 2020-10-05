@@ -44,7 +44,13 @@ async function saveCustomer(customer: Customer) {
   return dynamodb
     .put({
       TableName: CUSTOMERS_TABLE,
-      Item: customer,
+      Item: {
+        customerId: customer.customerId,
+        name: customer.name,
+        lastName: customer.lastName,
+        isPrime: customer.isPrime,
+        address: customer.address,
+      },
     })
     .promise();
 }
@@ -53,7 +59,12 @@ async function saveOrder(order: Order) {
   return dynamodb
     .put({
       TableName: ORDERS_TABLE,
-      Item: order,
+      Item: {
+        customerId: order.customerId,
+        orderId: order.orderId,
+        date: order.date.toISOString(),
+        total: order.total,
+      },
     })
     .promise();
 }

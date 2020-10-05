@@ -2,6 +2,7 @@ import * as Chance from "chance";
 import * as uuid from "uuid";
 import { Customer, Order } from "../models";
 import SingleTableApp from "../single-table";
+import MultiTableApp from "../multi-table";
 
 const chance = new Chance();
 
@@ -9,11 +10,13 @@ async function loadFakeData(numCustomers: number) {
   for (let i = 0; i < numCustomers; i++) {
     const customer = generateRandomCustomer();
     await SingleTableApp.saveCustomer(customer);
+    await MultiTableApp.saveCustomer(customer);
 
     const numOrders = chance.integer({ min: 5, max: 30 });
     for (let j = 0; j < numOrders; j++) {
       const order = generateRandomOrder(customer.customerId);
       await SingleTableApp.saveOrder(order);
+      await MultiTableApp.saveOrder(order);
     }
   }
 }

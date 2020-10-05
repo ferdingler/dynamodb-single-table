@@ -31,6 +31,7 @@
     "@aws-cdk/aws-lambda": "1.63.0",
     "@aws-cdk/core": "1.63.0",
     "aws-sdk": "^2.763.0",
+    "aws-xray-sdk": "^3.2.0",
     "chance": "^1.1.7",
     "source-map-support": "^0.5.16",
     "uuid": "^8.3.0"
