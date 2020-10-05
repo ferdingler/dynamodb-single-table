@@ -5,6 +5,9 @@ import * as iam from "@aws-cdk/aws-iam";
 import * as apigateway from "@aws-cdk/aws-apigatewayv2";
 
 export class MultiTableApp extends cdk.Stack {
+  public customersTable: dynamodb.Table;
+  public ordersTable: dynamodb.Table;
+
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
@@ -77,5 +80,8 @@ export class MultiTableApp extends cdk.Stack {
       integration: lambdaIntegration,
       methods: [apigateway.HttpMethod.GET],
     });
+
+    this.customersTable = customersTable;
+    this.ordersTable = ordersTable;
   }
 }

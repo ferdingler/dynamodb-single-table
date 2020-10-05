@@ -3,13 +3,13 @@ export interface Customer {
   name: string;
   lastName: string;
   isPrime: boolean;
-  orders: Array<Order>;
+  orders?: Array<Order>;
   address: {
     street: string;
     city: string;
     state: string;
     country: string;
-  }
+  };
 }
 
 export interface Order {

@@ -9,12 +9,15 @@
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
-    "deploy": "npm run build && cdk deploy '*'"
+    "bundle": "cp -R node_modules lambda/",
+    "deploy": "npm run build && npm run bundle && cdk deploy '*'"
   },
   "devDependencies": {
     "@aws-cdk/assert": "1.63.0",
+    "@types/chance": "^1.1.0",
     "@types/jest": "^26.0.10",
     "@types/node": "10.17.27",
+    "@types/uuid": "^8.3.0",
     "aws-cdk": "^1.63.0",
     "jest": "^26.4.2",
     "ts-jest": "^26.2.0",
@@ -22,12 +25,14 @@
     "typescript": "~3.9.7"
   },
   "dependencies": {
+    "@aws-cdk/aws-apigatewayv2": "1.63.0",
     "@aws-cdk/aws-dynamodb": "1.63.0",
     "@aws-cdk/aws-iam": "1.63.0",
     "@aws-cdk/aws-lambda": "1.63.0",
-    "@aws-cdk/aws-apigatewayv2": "1.63.0",
     "@aws-cdk/core": "1.63.0",
     "aws-sdk": "^2.763.0",
-    "source-map-support": "^0.5.16"
+    "chance": "^1.1.7",
+    "source-map-support": "^0.5.16",
+    "uuid": "^8.3.0"
   }
 }

@@ -40,6 +40,26 @@ async function fetchCustomerWithOrders(customerId: string): Promise<Customer> {
   return customer;
 }
 
+async function saveCustomer(customer: Customer) {
+  return dynamodb
+    .put({
+      TableName: CUSTOMERS_TABLE,
+      Item: customer,
+    })
+    .promise();
+}
+
+async function saveOrder(order: Order) {
+  return dynamodb
+    .put({
+      TableName: ORDERS_TABLE,
+      Item: order,
+    })
+    .promise();
+}
+
 export default {
   fetchCustomerWithOrders,
+  saveCustomer,
+  saveOrder,
 };

@@ -34,6 +34,26 @@ async function fetchCustomerWithOrders(customerId: string): Promise<Customer> {
   return customer;
 }
 
+async function saveCustomer(customer: Customer) {
+  const item = toCustomerItem(customer);
+  return dynamodb
+    .put({
+      TableName: SINGLE_TABLE,
+      Item: item,
+    })
+    .promise();
+}
+
+async function saveOrder(order: Order) {
+  const item = toOrderItem(order);
+  return dynamodb
+    .put({
+      TableName: SINGLE_TABLE,
+      Item: item,
+    })
+    .promise();
+}
+
 interface DynamoDBItem {
   pk: string;
   sk: string;
@@ -53,9 +73,7 @@ interface CustomerDynamoDBItem extends DynamoDBItem {
 }
 
 interface OrderDynamoDBItem extends DynamoDBItem {
-  orderId: string;
-  customerId: string;
-  date: Date;
+  date: string;
   total: number;
 }
 
@@ -79,6 +97,30 @@ function convertOrderItem(item: OrderDynamoDBItem): Order {
   };
 }
 
+function toCustomerItem(customer: Customer): CustomerDynamoDBItem {
+  return {
+    pk: `Customer#${customer.customerId}`,
+    sk: `Customer#${customer.customerId}`,
+    type: "Customer",
+    name: customer.name,
+    lastName: customer.lastName,
+    address: customer.address,
+    isPrime: customer.isPrime,
+  };
+}
+
+function toOrderItem(order: Order): OrderDynamoDBItem {
+  return {
+    pk: `Customer#${order.customerId}`,
+    sk: `Order#${order.orderId}`,
+    type: "Order",
+    total: order.total,
+    date: order.date.toISOString(),
+  };
+}
+
 export default {
   fetchCustomerWithOrders,
+  saveCustomer,
+  saveOrder,
 };

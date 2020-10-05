@@ -5,6 +5,8 @@ import * as iam from "@aws-cdk/aws-iam";
 import * as apigateway from "@aws-cdk/aws-apigatewayv2";
 
 export class SingleTableApp extends cdk.Stack {
+  public singleTable: dynamodb.Table;
+
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
@@ -66,5 +68,7 @@ export class SingleTableApp extends cdk.Stack {
       integration: lambdaIntegration,
       methods: [apigateway.HttpMethod.GET],
     });
+
+    this.singleTable = singleTable;
   }
 }
