@@ -1,3 +1,4 @@
+import * as AWSXRay from "aws-xray-sdk";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 import { Customer, Order } from "../models";
 import { CustomerDynamoDBItem, OrderDynamoDBItem } from "./dynamo-models";
@@ -5,6 +6,9 @@ import CustomerFactory from "./customer-factory";
 import OrderFactory from "./order-factory";
 
 const dynamodb = new DocumentClient();
+AWSXRay.setContextMissingStrategy(() => {});
+AWSXRay.captureAWSClient((dynamodb as any).service);
+
 const SINGLE_TABLE = process.env.SINGLE_TABLE || "";
 
 async function fetchCustomerWithOrders(customerId: string): Promise<Customer> {

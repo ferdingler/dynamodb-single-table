@@ -1,0 +1,39 @@
+{
+	"info": {
+		"_postman_id": "75fdbb98-df86-4e8e-9958-9e7b2b4300a8",
+		"name": "Multi Table",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Multi Table",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://nktlkliuzl.execute-api.us-west-2.amazonaws.com/customer/:customerId",
+					"protocol": "https",
+					"host": [
+						"nktlkliuzl",
+						"execute-api",
+						"us-west-2",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"customer",
+						":customerId"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "{{customerId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -1,7 +1,11 @@
+import * as AWSXRay from "aws-xray-sdk";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 import { Customer, Order } from "../models";
 
 const dynamodb = new DocumentClient();
+AWSXRay.setContextMissingStrategy(() => {});
+AWSXRay.captureAWSClient((dynamodb as any).service);
+
 const CUSTOMERS_TABLE = process.env.CUSTOMERS_TABLE || "";
 const ORDERS_TABLE = process.env.ORDERS_TABLE || "";
 

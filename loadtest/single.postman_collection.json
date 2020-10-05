@@ -1,0 +1,61 @@
+{
+	"info": {
+		"_postman_id": "ab6c3f1a-967e-4b68-a74f-43292bb2a3b8",
+		"name": "Single Table",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Single Table",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://l15ckes1za.execute-api.us-west-2.amazonaws.com/customer/:customerId",
+					"protocol": "https",
+					"host": [
+						"l15ckes1za",
+						"execute-api",
+						"us-west-2",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"customer",
+						":customerId"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "{{customerId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "a68937f8-57ae-4fca-805b-8376f3395fb6",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "eb684546-84ff-434f-9e78-53070f1d3dc2",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
