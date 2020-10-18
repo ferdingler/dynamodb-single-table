@@ -36,7 +36,7 @@ The multiple table stack deploys the following resources. Essentially, each enti
 
 The goal of this experiment was to determine how much better is having a single table design versus having multiple tables in terms of performance and cost. –– Is it really worth it?
 
-#### Dummy Data
+### Dummy Data
 
 I loaded all my tables with some dummy data to simulate a decent amount of _Customers_ and _Orders_. The Single Table had a total of **1,462,033 items** and 203.93 MB of storage.
 
@@ -56,11 +56,11 @@ Then I loaded the exact same entries into the multiple tables stack, except they
   </figure>
 </p>
 
-#### Load Testing
+### Load Testing
 
 Once the dummy data was loaded into DynamoDB, I generated some traffic to both applications using [Newman CLI](https://github.com/postmanlabs/newman). In order to make it more realistic, I created a [CSV file](loadtest/customers.csv) with 10k random customer IDs that already existed in DynamoDB and I iterated over those to make sure I was retrieving a different customer on every request –– just in case there was any sort of caching involved at any layer.
 
-#### Results
+### Results
 
 The results were somewhat obvious and expected. The Single Table stack only performs 1 query against DynamoDB to fetch all data needed to serve a request. Compared to the Multi Table stack which has to perform 2 separate queries to fetch the same data; logically, the single table would be more efficient.
 
@@ -71,7 +71,7 @@ The results were somewhat obvious and expected. The Single Table stack only perf
 | Single Table Stack | 24 ms       | 56.8 ms     |
 | Multi Table Stack  | 46 ms       | 95.8 ms     |
 
-**Latency Comparisson**
+#### Latency Comparisson
 
 <p align="center">
   <figure>
@@ -80,7 +80,7 @@ The results were somewhat obvious and expected. The Single Table stack only perf
   </figure>
 </p>
 
-**Cost Comparisson**
+#### Cost Comparisson
 
 The biggest surprise in the results was the difference in Read Units consumed, because I expected to see the same amount of units consumed in both stacks, as they were both reading the exact same Customers and Orders on every request.
 
