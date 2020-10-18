@@ -124,9 +124,22 @@ export interface Order {
 }
 ```
 
-I had to write a few converter functions to map a Typescript object into a DynamoDB item and viceversa. An example of the Customer object being converted to a DynamoDB item is the following:
+I had to write a few converter functions to map a domain model object into a DynamoDB item and viceversa. An example of the _Customer_ object being converted to a DynamoDB item is the following:
 
 ```js
+interface DynamoDBItem {
+  pk: string;
+  sk: string;
+  type: string;
+}
+
+export interface CustomerDynamoDBItem extends DynamoDBItem {
+  name: string;
+  lastName: string;
+  isPrime: boolean;
+  address: any;
+}
+
 function toItem(customer: Customer): CustomerDynamoDBItem {
   return {
     pk: `Customer#${customer.customerId}`,
